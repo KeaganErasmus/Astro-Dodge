@@ -1,10 +1,10 @@
 import pygame, time
 
 class Score:
-    def __init__(self) -> None:
+    def __init__(self, score) -> None:
         pygame.font.init()
         self.font = pygame.font.Font(None, 32)
-        self.score = 0
+        self.score = score
         self.old_time = time.time()
     
     def draw_score(self, screen):

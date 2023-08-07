@@ -9,7 +9,9 @@ from score import Score
 game_state = "game"
 old_time = time.time()
 
-score = Score()
+score = 0
+
+score = Score(score)
 
 def main_game(screen, dt, player, ships):
         # PLayer Related Methods
