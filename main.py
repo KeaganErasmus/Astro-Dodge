@@ -1,11 +1,13 @@
 import pygame
 import random
+import time
 
 from player import Player
 from astroid import Astroid
 from score import Score
 
 game_state = "game"
+old_time = time.time()
 
 score = Score()
 
