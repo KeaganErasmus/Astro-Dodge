@@ -3,15 +3,20 @@ import random
 
 from player import Player
 from astroid import Astroid
+from score import Score
 
 game_state = "game"
 
-
+score = Score()
 
 def main_game(screen, dt, player, ships):
         # PLayer Related Methods
         player.draw_player(screen)
         player.update(dt)
+
+        # Score Related Methods
+        score.draw_score(screen)
+        score.update_score()
 
         # Enemy Related Methods
         for ship in ships:
@@ -26,19 +31,13 @@ def game_lost():
 
 def main():
     pygame.init()
+    pygame.font.init()
     pygame.display.set_caption("Space Shooter")
     screen = pygame.display.set_mode((800, 400))
     clock = pygame.time.Clock()
 
-    score = 0
-
-    font = pygame.font.Font('assets/lunchds.ttf', 32)
-    score_text = font.render(str(score), True, "white")
-    score_text_rect = score_text.get_rect()
-    score_text_rect.center = (screen.get_width() // 2, screen.get_height() // 2)
-
     player = Player("assets/player_ship.png", 16, 16, 400, 300, 500)
-
+    
     astroids = []
     max_astroids = 10
 
@@ -50,7 +49,7 @@ def main():
     while running:
         dt = clock.tick() / 1000
         screen.fill((0,0,0))
-        screen.blit(score_text, score_text_rect)
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
