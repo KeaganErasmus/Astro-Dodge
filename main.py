@@ -6,6 +6,8 @@ from astroid import Astroid
 
 game_state = "game"
 
+
+
 def main_game(screen, dt, player, ships):
         # PLayer Related Methods
         player.draw_player(screen)
@@ -28,6 +30,13 @@ def main():
     screen = pygame.display.set_mode((800, 400))
     clock = pygame.time.Clock()
 
+    score = 0
+
+    font = pygame.font.Font('assets/lunchds.ttf', 32)
+    score_text = font.render(str(score), True, "white")
+    score_text_rect = score_text.get_rect()
+    score_text_rect.center = (screen.get_width() // 2, screen.get_height() // 2)
+
     player = Player("assets/player_ship.png", 16, 16, 400, 300, 500)
 
     astroids = []
@@ -41,6 +50,7 @@ def main():
     while running:
         dt = clock.tick() / 1000
         screen.fill((0,0,0))
+        screen.blit(score_text, score_text_rect)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
