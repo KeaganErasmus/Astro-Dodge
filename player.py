@@ -13,8 +13,9 @@ class Player:
 
     def draw_player(self, display: pygame.Surface) -> pygame.Surface:
         display.blit(self.sprite, (self.pos_x, self.pos_y))
+        pygame.draw.rect(display, "red", self.player_rec)
 
-    def update(self, dt) -> None:
+    def update(self, dt, astroid_rec) -> None:
         self.player_rec = pygame.Rect(self.pos_x, self.pos_y, self.width, self.height)
         keys = pygame.key.get_pressed()
         if keys[pygame.K_a]:
@@ -25,3 +26,10 @@ class Player:
             self.pos_y -= self.speed * dt
         if keys[pygame.K_s]:
             self.pos_y += self.speed * dt
+
+        astroid_rec = astroid_rec
+        # self.collision(self.player_rec, astroid_rec)
+    
+    def collision(self, player_rec: pygame.Rect, astroid_rec: list[pygame.Rect]):
+        if pygame.Rect.collidelistall(player_rec, astroid_rec):
+            print("hit")

@@ -12,26 +12,35 @@ old_time = time.time()
 score = 0
 
 score = Score(score)
+player = Player("assets/player_ship.png", 16, 16, 400, 300, 500)
+player_rec = player.player_rec
 
-def main_game(screen, dt, player, ships):
-        # PLayer Related Methods
-        player.draw_player(screen)
-        player.update(dt)
+astroids = []
+astroid_rects = []
+max_astroids = 10
 
-        # Score Related Methods
-        score.draw_score(screen)
-        score.update_score()
+def main_game(screen, dt, player, astroids):
+    # PLayer Related Methods
+    player.draw_player(screen)
+    player.update(dt, astroids)
 
-        # Enemy Related Methods
-        for ship in ships:
-            ship.draw_ship()
-            ship.update(dt)
+    # Score Related Methods
+    score.draw_score(screen)
+    score.update_score()
+
+    # Enemy Related Methods
+    for astroid in astroids:
+        astroid.draw_ship()
+        astroid.update(dt)
+
 
 def main_menu():
     pass
 
+
 def game_lost():
     pass
+
 
 def main():
     pygame.init()
@@ -40,14 +49,14 @@ def main():
     screen = pygame.display.set_mode((800, 400))
     clock = pygame.time.Clock()
 
-    player = Player("assets/player_ship.png", 16, 16, 400, 300, 500)
     
-    astroids = []
-    max_astroids = 10
-
     for i in range(max_astroids):
         new_astroid = Astroid("assets/enemy_ship.png", 16, 16, random.randrange(0, screen.get_width()), random.randrange(0,50), random.randrange(250,300), screen)
+        astroid_rects.append(new_astroid.enemy_rec)
         astroids.append(new_astroid)
+    
+    # print(astroid_rects)
+    # print(player_rec)
 
     running = True
     while running:
@@ -57,6 +66,9 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+
+        if pygame.Rect.collidelistall(player_rec, astroid_rects):
+            print("hit")
         
         # Depending on what state the game is in run the corrisponding methods
         if game_state == "game":

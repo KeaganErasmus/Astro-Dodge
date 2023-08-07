@@ -16,6 +16,8 @@ class Astroid:
 
     def draw_ship(self) -> pygame.Surface:
         self.screen.blit(self.sprite, (self.pos_x, self.pos_y))
+        pygame.draw.rect(self.screen, "red", self.enemy_rec)
+    
 
     def update(self, dt) -> None:
         self.enemy_rec = pygame.Rect(self.pos_x, self.pos_y, self.width, self.height)
