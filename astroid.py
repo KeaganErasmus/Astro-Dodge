@@ -1,6 +1,6 @@
 import pygame, random
 
-class Enemy:
+class Astroid:
     def __init__(self, sprite: str, width: int, height: int, x: int, y: int, speed: int, screen: pygame.Surface) -> None:
         self.sprite = pygame.image.load((sprite))
         self.width  = width
