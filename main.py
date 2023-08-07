@@ -30,12 +30,12 @@ def main():
 
     player = Player("assets/player_ship.png", 16, 16, 400, 300, 500)
 
-    ships = []
-    max_ships = 10
+    astroids = []
+    max_astroids = 10
 
-    for i in range(max_ships):
-        enemy_red = Astroid("assets/enemy_ship.png", 16, 16, random.randrange(0, screen.get_width()), random.randrange(0,50), random.randrange(250,300), screen)
-        ships.append(enemy_red)
+    for i in range(max_astroids):
+        new_astroid = Astroid("assets/enemy_ship.png", 16, 16, random.randrange(0, screen.get_width()), random.randrange(0,50), random.randrange(250,300), screen)
+        astroids.append(new_astroid)
 
     running = True
     while running:
@@ -47,15 +47,13 @@ def main():
         
         # Depending on what state the game is in run the corrisponding methods
         if game_state == "game":
-            main_game(screen, dt, player, ships)
+            main_game(screen, dt, player, astroids)
         if game_state == "lost":
             game_lost()
         if game_state == "menu":
             main_menu()
 
         pygame.display.update()
-        # print(clock.get_fps())
-        # clock.tick(60)
 
     pygame.quit()
 
