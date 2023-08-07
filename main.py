@@ -34,7 +34,7 @@ def main():
     max_ships = 10
 
     for i in range(max_ships):
-        enemy_red = Astroid("assets/enemy_ship.png", 16, 16, random.randrange(0, screen.get_width()), random.randrange(0,50), 250, screen)
+        enemy_red = Astroid("assets/enemy_ship.png", 16, 16, random.randrange(0, screen.get_width()), random.randrange(0,50), random.randrange(250,300), screen)
         ships.append(enemy_red)
 
     running = True
