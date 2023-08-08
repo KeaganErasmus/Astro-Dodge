@@ -5,15 +5,18 @@ import time
 from player import Player
 from astroid import Astroid
 from score import Score
+from menu import Menu
 
 screen = pygame.display.set_mode((800, 400))
 
-game_state = "game"
+game_state = "menu"
 old_time = time.time()
 
-score = 0
+menu = Menu()
 
+score = 0
 score = Score(score)
+
 player = Player("assets/player_ship.png", 16, 16, 400, 300, 500)
 player_rec = player.player_rec
 
@@ -46,7 +49,7 @@ def main_game(screen, dt, player, astroids):
 
 
 def main_menu():
-    pass
+    menu.draw_menu(screen)
 
 
 def game_lost():
