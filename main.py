@@ -39,7 +39,7 @@ def main_game(screen, dt, player, astroids):
 
     # Enemy Related Methods
     for astroid in astroids:
-        astroid.draw_ship(screen)
+        astroid.draw_ship()
         astroid.update(dt)
     
     player.collisions(rec_list)

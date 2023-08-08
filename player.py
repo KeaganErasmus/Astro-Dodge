@@ -13,7 +13,6 @@ class Player:
 
     def draw_player(self, display: pygame.Surface) -> pygame.Surface:
         display.blit(self.sprite, (self.pos_x, self.pos_y))
-        # pygame.draw.rect(display, "red", self.player_rec)
 
     def update(self, dt) -> None:
         self.player_rec = pygame.Rect(self.pos_x, self.pos_y, self.width, self.height)
