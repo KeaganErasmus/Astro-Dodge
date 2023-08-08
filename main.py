@@ -62,10 +62,6 @@ def main():
     pygame.display.set_caption("Space Shooter")
     clock = pygame.time.Clock()
 
-    
-    # print(astroid_rects)
-    # print(player_rec)
-
     running = True
     while running:
         dt = clock.tick() / 1000
@@ -74,9 +70,6 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-
-        # for rects in astroid_rects:
-        #     pygame.draw.rect(screen, "green", rects)
         
         # Depending on what state the game is in run the corrisponding methods
         if game_state == "game":
