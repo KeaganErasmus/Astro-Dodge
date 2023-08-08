@@ -14,14 +14,14 @@ class Astroid:
 
         self.direction = "right"
 
-    def draw_ship(self) -> pygame.Surface:
+    def draw_ship(self, screen) -> pygame.Surface:
         self.screen.blit(self.sprite, (self.pos_x, self.pos_y))
-        pygame.draw.rect(self.screen, "red", self.enemy_rec)
+        pygame.draw.rect(screen, "red", self.enemy_rec)
     
 
     def update(self, dt) -> None:
+        # self.get_rec()
         self.enemy_rec = pygame.Rect(self.pos_x, self.pos_y, self.width, self.height)
-
         self.pos_y += self.speed * dt
 
         if self.direction == "right":
@@ -36,5 +36,9 @@ class Astroid:
 
         if self.pos_y >= self.screen.get_height():
             self.pos_y = 0
+        
 
+    def get_rec(self):
+        enemy_rec = pygame.Rect(self.pos_x, self.pos_y, self.width, self.height)
+        return enemy_rec
 

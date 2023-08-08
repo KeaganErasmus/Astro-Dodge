@@ -6,6 +6,8 @@ from player import Player
 from astroid import Astroid
 from score import Score
 
+screen = pygame.display.set_mode((800, 400))
+
 game_state = "game"
 old_time = time.time()
 
@@ -19,10 +21,17 @@ astroids = []
 astroid_rects = []
 max_astroids = 10
 
+for i in range(max_astroids):
+    new_astroid = Astroid("assets/enemy_ship.png", 16, 16, random.randrange(0, screen.get_width()), random.randrange(0,50), random.randrange(250,300), screen)
+    astroids.append(new_astroid)
+
+
 def main_game(screen, dt, player, astroids):
     # PLayer Related Methods
     player.draw_player(screen)
-    player.update(dt, astroids)
+    player.update(dt)
+    
+    rec_list = list(map(lambda x: x.get_rec(), astroids))
 
     # Score Related Methods
     score.draw_score(screen)
@@ -30,8 +39,10 @@ def main_game(screen, dt, player, astroids):
 
     # Enemy Related Methods
     for astroid in astroids:
-        astroid.draw_ship()
+        astroid.draw_ship(screen)
         astroid.update(dt)
+    
+    player.collisions(rec_list)
 
 
 def main_menu():
@@ -46,14 +57,8 @@ def main():
     pygame.init()
     pygame.font.init()
     pygame.display.set_caption("Space Shooter")
-    screen = pygame.display.set_mode((800, 400))
     clock = pygame.time.Clock()
 
-    
-    for i in range(max_astroids):
-        new_astroid = Astroid("assets/enemy_ship.png", 16, 16, random.randrange(0, screen.get_width()), random.randrange(0,50), random.randrange(250,300), screen)
-        astroid_rects.append(new_astroid.enemy_rec)
-        astroids.append(new_astroid)
     
     # print(astroid_rects)
     # print(player_rec)
@@ -67,8 +72,8 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
-        if pygame.Rect.collidelistall(player_rec, astroid_rects):
-            print("hit")
+        # for rects in astroid_rects:
+        #     pygame.draw.rect(screen, "green", rects)
         
         # Depending on what state the game is in run the corrisponding methods
         if game_state == "game":
