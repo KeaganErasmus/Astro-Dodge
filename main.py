@@ -34,7 +34,8 @@ def main_game(screen, dt, player, astroids):
     player.draw_player(screen)
     player.update(dt)
     
-    rec_list = list(map(lambda x: x.get_rec(), astroids))
+    # rec_list = list(map(lambda x: x.get_rec(), astroids))
+    rec_list = [astroid.get_rec() for astroid in astroids]
 
     # Score Related Methods
     score.draw_score(screen)
@@ -50,6 +51,7 @@ def main_game(screen, dt, player, astroids):
 
 def main_menu():
     menu.draw_menu(screen)
+    menu.clicked_button()
 
 
 def game_lost():
