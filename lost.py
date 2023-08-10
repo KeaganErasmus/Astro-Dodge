@@ -1,6 +1,6 @@
 import pygame
 
-class Menu:
+class Lost:
     def __init__(self) -> None:
         pygame.font.init()
         self.title_font = pygame.font.Font(None, 32)
@@ -12,9 +12,10 @@ class Menu:
 
 
     def draw_menu(self, screen):
-        title_text = self.title_font.render("Astro Dodge", True, "White")
+        title_text = self.title_font.render("You Lost :(", True, "White")
         play_text = self.font.render("Play", True, "White")
         quit_text = self.font.render("Quit", True, "White")
+    
 
         self.quit_rec = quit_text.get_rect()
         self.quit_rec.center = ((screen.get_width() // 2 + 15), 205)

@@ -26,6 +26,7 @@ class Player:
         if keys[pygame.K_s]:
             self.pos_y += self.speed * dt
 
+
     def collisions(self, astroids):
         if self.player_rec.collidelistall(astroids):
-            print("hit")
+            return True

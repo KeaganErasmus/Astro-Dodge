@@ -6,13 +6,15 @@ from player import Player
 from astroid import Astroid
 from score import Score
 from menu import Menu
+from lost import Lost
 
 screen = pygame.display.set_mode((800, 400))
 
-game_state = "game"
+game_state = "menu"
 old_time = time.time()
 
 menu = Menu()
+lost = Lost()
 
 score = 0
 score = Score(score)
@@ -29,6 +31,7 @@ for i in range(max_astroids):
 
 
 def main_game(screen, dt, player, astroids):
+    global game_state
     # PLayer Related Methods
     player.draw_player(screen)
     player.update(dt)
@@ -45,18 +48,27 @@ def main_game(screen, dt, player, astroids):
         astroid.draw_ship()
         astroid.update(dt)
     
-    player.collisions(rec_list)
+    if player.collisions(rec_list):
+        game_state = "lost"
 
 
-def main_menu(state):
+def main_menu():
+    global game_state
     menu.draw_menu(screen)
     if menu.clicked_button() == "play":
-        state = "game"
-        print("yay yeeey")
+        game_state = "game"
+    elif menu.clicked_button() == "quit":
+        pygame.quit()
 
 
-def game_lost():
-    pass
+def game_lost(screen):
+    global game_state
+    lost.draw_menu(screen)
+    if lost.clicked_button() == "play":
+        game_state = "game"
+    elif lost.clicked_button() == "quit":
+        pygame.quit()
+
 
 
 def main():
@@ -66,7 +78,7 @@ def main():
     clock = pygame.time.Clock()
 
     running = True
-    while running:
+    while running:       
         dt = clock.tick() / 1000
         screen.fill((0,0,0))
 
@@ -75,12 +87,12 @@ def main():
                 running = False
         
         # Depending on what state the game is in run the corrisponding methods
-        if game_state == "game":
+        if game_state == "menu":
+            main_menu()
+        elif game_state == "game":
             main_game(screen, dt, player, astroids)
         elif game_state == "lost":
-            game_lost()
-        elif game_state == "menu":
-            main_menu(game_state)
+            game_lost(screen)
 
         pygame.display.update()
 
