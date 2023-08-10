@@ -16,19 +16,30 @@ class Menu:
         play_text = self.font.render("Play", True, "White")
         quit_text = self.font.render("Quit", True, "White")
 
-        self.title_rec = title_text.get_rect()
-        self.play_rec = title_text.get_rect()
-        self.quit_rec = title_text.get_rect()
+        # self.title_rec = title_text.get_rect()
+        # self.title_rec.center = ((screen.get_width() // 2 + 20), 110)
+        
+        self.play_rec = play_text.get_rect()
+        self.play_rec.center = ((screen.get_width() // 2 + 15), 155)
+
+        self.quit_rec = quit_text.get_rect()
+        self.quit_rec.center = ((screen.get_width() // 2 + 15), 205)
 
         screen.blit(title_text, ((screen.get_width() // 2 - 50), 100))
         screen.blit(play_text, (400, 150))
         screen.blit(quit_text, (400, 200))
 
-        pygame.draw.rect(screen, "green", self.title_rec)
     
-    def clicked_button(self):
+    def clicked_button(self) -> str:
         for event in pygame.event.get():
             mouse = pygame.mouse.get_pos()
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                if self.title_rec.collidepoint(mouse):
-                    print("title")
+                # print(mouse)
+                # if self.title_rec.collidepoint(mouse):
+                #     print("title")
+                if self.play_rec.collidepoint(mouse):
+                    print("play")
+                    return "play"
+                if self.quit_rec.collidepoint(mouse):
+                    print("quit")
+                    return "quit"

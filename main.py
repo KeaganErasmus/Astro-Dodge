@@ -9,7 +9,7 @@ from menu import Menu
 
 screen = pygame.display.set_mode((800, 400))
 
-game_state = "menu"
+game_state = "game"
 old_time = time.time()
 
 menu = Menu()
@@ -21,7 +21,6 @@ player = Player("assets/player_ship.png", 16, 16, 400, 300, 500)
 player_rec = player.player_rec
 
 astroids = []
-astroid_rects = []
 max_astroids = 10
 
 for i in range(max_astroids):
@@ -49,9 +48,11 @@ def main_game(screen, dt, player, astroids):
     player.collisions(rec_list)
 
 
-def main_menu():
+def main_menu(state):
     menu.draw_menu(screen)
-    menu.clicked_button()
+    if menu.clicked_button() == "play":
+        state = "game"
+        print("yay yeeey")
 
 
 def game_lost():
@@ -76,10 +77,10 @@ def main():
         # Depending on what state the game is in run the corrisponding methods
         if game_state == "game":
             main_game(screen, dt, player, astroids)
-        if game_state == "lost":
+        elif game_state == "lost":
             game_lost()
-        if game_state == "menu":
-            main_menu()
+        elif game_state == "menu":
+            main_menu(game_state)
 
         pygame.display.update()
 
