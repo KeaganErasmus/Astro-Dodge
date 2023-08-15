@@ -1,5 +1,6 @@
 import pygame
 
+
 class Lost:
     def __init__(self) -> None:
         pygame.font.init()
@@ -7,15 +8,13 @@ class Lost:
         self.font = pygame.font.Font(None, 20)
 
         self.title_rec = ""
-        self.play_text = pygame.Rect(400,150, 26, 20)
+        self.play_text = pygame.Rect(400, 150, 26, 20)
         self.quit_text = pygame.Rect
-
 
     def draw_menu(self, screen):
         title_text = self.title_font.render("You Lost :(", True, "White")
         play_text = self.font.render("Return to main menu", True, "White")
         quit_text = self.font.render("Quit", True, "White")
-    
 
         self.quit_rec = quit_text.get_rect()
         self.quit_rec.center = ((screen.get_width() // 2 + 15), 205)
@@ -24,7 +23,6 @@ class Lost:
         screen.blit(play_text, (400, 150))
         screen.blit(quit_text, (400, 200))
 
-    
     def clicked_button(self) -> str:
         button_pressed = pygame.mouse.get_pressed()
         mouse = pygame.mouse.get_pos()

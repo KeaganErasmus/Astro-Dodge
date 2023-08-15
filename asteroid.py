@@ -1,22 +1,23 @@
-import pygame, random
+import pygame
 
-class Astroid:
-    def __init__(self, sprite: str, width: int, height: int, x: int, y: int, speed: int, screen: pygame.Surface) -> None:
+
+class Asteroid:
+    def __init__(self, sprite: str, width: int, height: int, x: int, y: int, speed: int,
+                 screen: pygame.Surface) -> None:
         self.sprite = pygame.image.load((sprite))
-        self.width  = width
+        self.width = width
         self.height = height
-        self.pos_x  = x
-        self.pos_y  = y
-        self.speed  = speed
+        self.pos_x = x
+        self.pos_y = y
+        self.speed = speed
         self.screen = screen
 
         self.enemy_rec = pygame.Rect(self.pos_x, self.pos_y, self.width, self.height)
 
         self.direction = "right"
 
-    def draw_ship(self) -> pygame.Surface:
+    def draw_ship(self):
         self.screen.blit(self.sprite, (self.pos_x, self.pos_y))
-    
 
     def update(self, dt) -> None:
         # self.get_rec()
@@ -35,9 +36,7 @@ class Astroid:
 
         if self.pos_y >= self.screen.get_height():
             self.pos_y = 0
-        
 
     def get_rec(self):
         enemy_rec = pygame.Rect(self.pos_x, self.pos_y, self.width, self.height)
         return enemy_rec
-
