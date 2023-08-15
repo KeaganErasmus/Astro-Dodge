@@ -13,7 +13,7 @@ class Lost:
 
     def draw_menu(self, screen):
         title_text = self.title_font.render("You Lost :(", True, "White")
-        play_text = self.font.render("Play", True, "White")
+        play_text = self.font.render("Return to main menu", True, "White")
         quit_text = self.font.render("Quit", True, "White")
     
 
@@ -30,8 +30,6 @@ class Lost:
         mouse = pygame.mouse.get_pos()
         if button_pressed[0]:
             if self.play_text.collidepoint(mouse):
-                print("play")
-                return "play"
+                return "menu"
             if self.quit_rec.collidepoint(mouse):
-                print("quit")
                 return "quit"
